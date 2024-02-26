@@ -14,11 +14,11 @@ const clientsroutes = require('./app/routes/client.routes')
 const app = express();
 
 const corsOptions = {
-  // origin: ['http://localhost:4200'], // Remplacez par votre domaine autorisé
-  origin: '*',
+  origin: ['http://localhost:4200'], // Remplacez par votre domaine autorisé
+  // origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Méthodes HTTP autorisées
-  allowedHeaders: ['Content-Type', 'Authorization'], // En-têtes autorisés
-  // credentials: true 
+  // allowedHeaders: ['Content-Type', 'Authorization'], // En-têtes autorisés
+  credentials: true 
 };
 
 // app.use(cors())
