@@ -21,14 +21,14 @@ const corsOptions = {
   credentials: true 
 };
 
-// app.use(cors())
+app.use(cors())
 
 // app.use(cors({
 //   origin: ['http://localhost:4200'],
 //   credentials: true 
 // }));
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 app.use('/service',servicesroutes).use('/',etatsroutes).use('/client',clientsroutes)
 
