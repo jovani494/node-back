@@ -18,7 +18,7 @@ const corsOptions = {
   origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Méthodes HTTP autorisées
   allowedHeaders: ['Content-Type', 'Authorization'], // En-têtes autorisés
-  credentials: true 
+  credentials: false 
 };
 
 // app.use(cors())
