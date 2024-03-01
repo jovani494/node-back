@@ -3,9 +3,7 @@ const mongoose = require("mongoose");
 const EmployeSchema = new mongoose.Schema({
   Nom: {
     type: String,
-    required: true,
-    trim: true,
-    lowercase: true,
+    required: true
   },
   Prenom : {
     type: String,
