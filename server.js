@@ -15,19 +15,19 @@ const rendezvousroutes = require('./app/routes/rendezvous.routes')
 
 const app = express();
 
-const corsOptions = {
-  origin: ['https://mean-front-jovani-idealy.onrender.com'], // Remplacez par votre domaine autorisé
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Méthodes HTTP autorisées
-  allowedHeaders: ['Content-Type', 'Authorization'], // En-têtes autorisés
-  credentials: true 
-};
+// const corsOptions = {
+//   origin: ['https://mean-front-jovani-idealy.onrender.com'], // Remplacez par votre domaine autorisé
+//   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Méthodes HTTP autorisées
+//   allowedHeaders: ['Content-Type', 'Authorization'], // En-têtes autorisés
+//   credentials: true 
+// };
 
 // app.use(cors())
 
-// app.use(cors({
-//   origin: ['http://localhost:4200'],
-//   credentials: true 
-// }));
+app.use(cors({
+  origin: ['https://mean-front-jovani-idealy.onrender.com'],
+  credentials: true 
+}));
 
 app.use(cors(corsOptions));
 
