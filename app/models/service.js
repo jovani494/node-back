@@ -3,9 +3,7 @@ const mongoose = require("mongoose");
 const ServiceSchema = new mongoose.Schema({
   Nom: {
     type: String,
-    required: true,
-    trim: true,
-    lowercase: true,
+    required: true
   },
   Description: String,
   Duree: Number,
