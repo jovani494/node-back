@@ -3,9 +3,8 @@ const mongoose = require("mongoose");
 const ClientSchema = new mongoose.Schema({
   Nom: {
     type: String,
-    required: true,
-    trim: true,
-    lowercase: true,
+    required: true
+    
   },
   Prenom: String,
   Gender : {
