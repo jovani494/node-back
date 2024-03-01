@@ -4,6 +4,7 @@ const User = db.user;
 const Role = db.role;
 const Client = db.client;
 const Employe = db.employe;
+const Manager = db.manager;
 
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
@@ -21,29 +22,42 @@ exports.signup = (req, res) => {
       return;
     }
 
-    if (req.body.roles) {
-      Role.find(
-        {
-          name: { $in: req.body.roles },
-        },
-        (err, roles) => {
-          if (err) {
-            res.status(500).send({ message: err });
-            return;
-          }
-
-          savedUser.roles = roles.map((role) => role._id);
-          savedUser.save((err) => {
+      if (req.body.Services) {
+        Role.findOne({name: "moderator" }, (err, role) => {
             if (err) {
               res.status(500).send({ message: err });
               return;
             }
 
-            res.send({ message: "User was registered successfully!" });
-          });
-        }
-      );
-    } else {
+            savedUser.roles = [role._id];
+            
+              savedUser.save((err) => {
+                if (err) {
+                  res.status(500).send({ message: err });
+                  return;
+                }
+
+                const employe = new Employe({
+                  Nom: req.body.Nom,
+                  Prenom: req.body.Prenom,
+                  Gender: req.body.Gender,
+                  Phone: req.body.Phone,
+                  Services : req.body.Services,
+                  avatar : "https://ssl.gstatic.com/accounts/ui/avatar_2x.png",
+                  User : savedUser._id,
+                })
+      
+                employe.save((err, savedClient) => {
+                  if (err) {
+                    res.status(500).send({ message: err });
+                    return;
+                  }
+          
+                  res.send({ message: "User and employe were registered successfully!" });
+                });
+              });
+        });
+      } else {
       Role.findOne({ name: "user" }, (err, role) => {
         if (err) {
           res.status(500).send({ message: err });
@@ -104,7 +118,7 @@ exports.signin = (req, res) => {
         return res.status(401).send({ message: "Invalid Password!" });
       }
 
-      const token = jwt.sign({ id: user.id },
+      const token = jwt.sign({ id: user._id },
                               config.secret,
                               {
                                 algorithm: 'HS256',
@@ -125,6 +139,7 @@ exports.signin = (req, res) => {
         username: user.username,
         email: user.email,
         roles: authorities,
+        token : token
       });
     });
 };

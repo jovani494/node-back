@@ -1,6 +1,6 @@
 const express = require("express");
-const ClientController = require('../controllers/client.controller')
-const ClientModel = require('../models/client.model');
+const EmployeController = require('../controllers/employes.controller')
+const EmployeModel = require('../models/employe.model');
 const bodyParser = require('body-parser');
 const app = express();
 
@@ -9,10 +9,11 @@ const multer = require('multer');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.get('/', ClientController.findAll);
-app.get('/get/:id', ClientController.getClient);
-app.put('/update/:id', ClientController.update);
-app.delete('/delete/:id', ClientController.destroy);
+app.get('/', EmployeController.findAll);
+app.get('/detail/:id', EmployeController.findOne);
+app.get('/get/:id', EmployeController.getEmploye);
+app.put('/update/:id', EmployeController.update);
+app.delete('/delete/:id', EmployeController.destroy);
 
 const DIR = "./app/public/";
 
@@ -52,20 +53,20 @@ app.put("/createimg/:id", upload.single("avatar"), async (req, res, next) => {
     const url = req.protocol + "://" + req.get("host");
     const avatar = url + "/public/" + req.file.filename;
    
-    const updatedClient = await ClientModel.findByIdAndUpdate(
+    const updatedEmploye = await EmployeModel.findByIdAndUpdate(
       req.params.id,
       { avatar: avatar },
       { new: true }
     );
 
-    if (!updatedClient) {
-      return res.status(404).json({ message: 'Client non trouvé.' });
+    if (!updatedEmploye) {
+      return res.status(404).json({ message: 'Employe non trouvé.' });
     }
 
-      res.status(200).json({ message: 'Image du client mise à jour avec succès.', updatedClient });
+      res.status(200).json({ message: 'Image du employe mise à jour avec succès.', updatedEmploye });
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: 'Une erreur est survenue lors de la mise à jour de l\'image du client.' });
+      res.status(500).json({ message: 'Une erreur est survenue lors de la mise à jour de l\'image du employe.' });
     }
 });
 

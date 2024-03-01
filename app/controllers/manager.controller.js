@@ -1,28 +1,28 @@
-const ClientModel = require('../models/client.model');
+const ManagerModel = require('../models/manager.model');
 
-// Create and Save a new service
+// Create and Save a new manager
 
-// Retrieve all services from the database.
+// Retrieve all managers from the database.
 exports.findAll = async (req, res) => {
     try {
-        const service = await ClientModel.find();
-        res.status(200).json(service);
+        const manager = await ManagerModel.find();
+        res.status(200).json(manager);
     } catch(error) {
         res.status(404).json({message: error.message});
     }
 };
 
-// Find a single service with an id
+// Find a single manager with an id
 exports.getClient = async (req, res) => {
     try {
-        const client = await ClientModel.findOne({User: req.params.id});
-        res.status(200).json(client);
+        const manager = await ManagerModel.find({User: req.params.id});
+        res.status(200).json(manager);
     } catch(error) {
         res.status(404).json({ message: error.message});
     }
 };
 
-// Update a service by the id in the request
+// Update a manager by the id in the request
 exports.update = async (req, res) => {
     if(!req.body) {
         res.status(400).send({
@@ -32,13 +32,13 @@ exports.update = async (req, res) => {
     
     const id = req.params.id;
     
-    await ClientModel.findByIdAndUpdate(id, req.body, {new:true}).then(data => {
+    await ManagerModel.findByIdAndUpdate(id, req.body, {new:true}).then(data => {
         if (!data) {
             res.status(404).send({
-                message: `service not found.`
+                message: `manager not found.`
             });
         }else{
-            res.send({ message: "service updated successfully." })
+            res.send({ message: "manager updated successfully." })
         }
     }).catch(err => {
         res.status(500).send({
@@ -47,12 +47,12 @@ exports.update = async (req, res) => {
     });
 };
 
-// Delete a service with the specified id in the request
+// Delete a manager with the specified id in the request
 exports.destroy = async (req, res) => {
     const id = req.params.id;
     try{
-     const deleteservices = await ClientModel.findByIdAndDelete(id, { useFindAndModify: false })
-    if(!deleteservices)
+     const deletemanagers = await ManagerModel.findByIdAndDelete(id, { useFindAndModify: false })
+    if(!deletemanagers)
     {
         return res.status(404).send();
     }  

@@ -15,7 +15,7 @@ const EmployeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  availability: [{ start: String, end: String }],
+  // availability: [{ start: String, end: String }],
   avatar: {
     type: String,
   },
@@ -23,6 +23,11 @@ const EmployeSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  User: 
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
+    },
   Services : 
     {
       type : mongoose.Schema.Types.ObjectId, ref: 'services'

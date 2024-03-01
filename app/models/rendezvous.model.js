@@ -4,6 +4,9 @@ const RendezVousSchema = new mongoose.Schema({
   DateRdv : {
         type : Date
   },
+  Heure : {
+    type : String
+  },
   Client : {
         type : mongoose.Schema.Types.ObjectId, ref: 'clients'
   },

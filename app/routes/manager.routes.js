@@ -1,6 +1,6 @@
 const express = require("express");
-const ClientController = require('../controllers/client.controller')
-const ClientModel = require('../models/client.model');
+const ManagerController = require('../controllers/manager.controller')
+const ManagerModel = require('../models/manager.model');
 const bodyParser = require('body-parser');
 const app = express();
 
@@ -9,10 +9,10 @@ const multer = require('multer');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.get('/', ClientController.findAll);
-app.get('/get/:id', ClientController.getClient);
-app.put('/update/:id', ClientController.update);
-app.delete('/delete/:id', ClientController.destroy);
+app.get('/', ManagerController.findAll);
+app.get('/get/:id', ManagerController.getManager);
+app.put('/update/:id', ManagerController.update);
+app.delete('/delete/:id', ManagerController.destroy);
 
 const DIR = "./app/public/";
 
@@ -52,20 +52,20 @@ app.put("/createimg/:id", upload.single("avatar"), async (req, res, next) => {
     const url = req.protocol + "://" + req.get("host");
     const avatar = url + "/public/" + req.file.filename;
    
-    const updatedClient = await ClientModel.findByIdAndUpdate(
+    const updatedManager = await ManagerModel.findByIdAndUpdate(
       req.params.id,
       { avatar: avatar },
       { new: true }
     );
 
-    if (!updatedClient) {
-      return res.status(404).json({ message: 'Client non trouvé.' });
+    if (!updatedManager) {
+      return res.status(404).json({ message: 'Manager non trouvé.' });
     }
 
-      res.status(200).json({ message: 'Image du client mise à jour avec succès.', updatedClient });
+      res.status(200).json({ message: 'Image du manager mise à jour avec succès.', updatedManager });
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: 'Une erreur est survenue lors de la mise à jour de l\'image du client.' });
+      res.status(500).json({ message: 'Une erreur est survenue lors de la mise à jour de l\'image du manager.' });
     }
 });
 

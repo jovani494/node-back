@@ -9,15 +9,16 @@ const dbConfig = require("./app/config/db.config");
 const servicesroutes = require('./app/routes/serviceRoutes')
 const etatsroutes = require('./app/routes/etatRoutes')
 const clientsroutes = require('./app/routes/client.routes')
-
+const employeroutes = require('./app/routes/employe.routes')
+const emploiDuTempsRoutes = require('./app/routes/emploiDuTemps.routes')
+const rendezvousroutes = require('./app/routes/rendezvous.routes')
 
 const app = express();
 
 const corsOptions = {
   origin: ['http://localhost:4200'], // Remplacez par votre domaine autorisé
-  // origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Méthodes HTTP autorisées
-  // allowedHeaders: ['Content-Type', 'Authorization'], // En-têtes autorisés
+  allowedHeaders: ['Content-Type', 'Authorization'], // En-têtes autorisés
   credentials: true 
 };
 
@@ -30,7 +31,8 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.use('/service',servicesroutes).use('/',etatsroutes).use('/client',clientsroutes)
+app.use('/service',servicesroutes).use('/',etatsroutes).use('/client',clientsroutes).use('/employe',employeroutes)
+.use('/edt', emploiDuTempsRoutes).use('/appointment', rendezvousroutes)
 
 app.use(express.json());
 
@@ -63,7 +65,7 @@ db.mongoose
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
+  res.json({ message: "Welcome to beauty salon application." });
 });
 
 // routes
