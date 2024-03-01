@@ -29,7 +29,7 @@ app.use(cors({
   credentials: true 
 }));
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 app.use('/service',servicesroutes).use('/',etatsroutes).use('/client',clientsroutes).use('/employe',employeroutes)
 .use('/edt', emploiDuTempsRoutes).use('/appointment', rendezvousroutes)
