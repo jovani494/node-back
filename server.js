@@ -16,7 +16,7 @@ const rendezvousroutes = require('./app/routes/rendezvous.routes')
 const app = express();
 
 const corsOptions = {
-  origin: ['http://localhost:4200'], // Remplacez par votre domaine autorisé
+  origin: ['https://mean-front-jovani-idealy.onrender.com'], // Remplacez par votre domaine autorisé
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Méthodes HTTP autorisées
   allowedHeaders: ['Content-Type', 'Authorization'], // En-têtes autorisés
   credentials: true 
